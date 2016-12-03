@@ -17,7 +17,27 @@ class loadData:
         Constructor
         '''
         self.basicData = pd.read_csv(basicDataFileName)
+        self.basicData.set_index('Pokemon No.', inplace=True, drop=False)
         self.largeData = pd.read_csv(largeCleanedDataFileName)
     
-    def getCityNames(self, data):
-        self.
+    def listPokemonNameswithID(self):
+        '''return a series of Pokemon names, with pokemonID as index'''
+        self.nameList = self.basicData['Name']
+        return  self.nameList
+    
+    def pokemonwideDataframe(self, pokemonId):
+        '''return the records of one certain city'''
+        pokemonRecords = self.largeData[self.largeData["pokemonId"]==pokemonId]
+        return pokemonRecords
+    
+
+    def getCityNames(self):
+        '''return a numpy ndarray of cities'''
+        self.cityList = self.largeData['city'].unique()
+        return self.cityList
+    
+    def citywideDataframe(self, cityName):
+        '''return the records of one certain city'''
+        citywideRecords = self.largeData[self.largeData["city"]==cityName]
+        return citywideRecords
+    
