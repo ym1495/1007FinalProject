@@ -49,4 +49,6 @@ class dataClean():
             if self.data_origin.ix[0, col_name] == True or self.data_origin.ix[0, col_name] == False:
                 self.data_origin[col_name] = self.data_origin[col_name].map(Event_to_int)
         return self.data_origin
-            
+    
+    def writetoFile(self, newfilename):
+        self.data_origin.to_csv('newfilename)
