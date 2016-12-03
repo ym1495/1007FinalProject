@@ -41,3 +41,13 @@ class loadData:
         citywideRecords = self.largeData[self.largeData["city"]==cityName]
         return citywideRecords
     
+    def getContinentNames(self):
+        '''return a numpy ndarray of cities'''
+        self.continentList = self.largeData['continent'].unique()
+        return self.continentList
+    
+    def continentwideDataframe(self, continent):
+        '''return the records of one certain city'''
+        continentwideRecords = self.largeData[self.largeData["continent"]==continent]
+        return continentwideRecords
+    
