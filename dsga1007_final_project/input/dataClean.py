@@ -51,4 +51,5 @@ class dataClean():
         return self.data_origin
     
     def writetoFile(self, newfilename):
-        self.data_origin.to_csv('newfilename)
+        self.data_origin.to_csv('newfilename')
+        file.close()
