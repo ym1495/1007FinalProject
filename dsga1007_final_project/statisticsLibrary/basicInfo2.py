@@ -6,16 +6,19 @@ Created on Dec 3, 2016
 import numpy as np
 import pandas as pd
 from input.loadData import *
+from
 
 class basicFunctions():
     '''
     More info about pokemons in certain places, with pokemon go data
     '''
-    def __init__(self, str):
+    def __init__(self, pokemonSeries, cityList, continentList):
         '''
         Constructor
         '''
-        str = 'want more info?'
+        self.pokemonSeries = pokemonSeries
+        self.cityList = cityList
+        self.continentList = continentList
     
     def listPokemonIdsAppeared(self,dataframe):
         pokemonIdList = dataframe['pokemonId'].unique()
@@ -44,7 +47,15 @@ class basicFunctions():
         '''return the records of one certain city'''
         continentwideRecords = dataframe[dataframe["continent"]==continent]
         return continentwideRecords
-    def hasItAppearedIn(self, pokemonId, place):
+    
+    def hasItAppearedIn(self, dataframe, pokemonId, place):
         if place in {'the world', 'global','globally','globaly','around the world'}:
             return (pokemonId in dataframe['pokemonId'].unique())
-        elif place in dataframe['pokemonId'].unique()
+        elif place in self.cityList:
+            tmp =  self.citywideDataframe(self, dataframe, place)
+            return (pokemonId in tmp['pokemonId'].unique())
+        elif place in self.continentList:
+            tmp =  self.continentwideDataframe(self, dataframe, place)
+            return (pokemonId in tmp['pokemonId'].unique())
+        else:
+            raise placeError()

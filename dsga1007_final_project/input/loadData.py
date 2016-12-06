@@ -24,9 +24,14 @@ class loadData:
         
         '''return a numpy ndarray of cities'''
         self.cityList = self.largeData['city'].unique()
+        self.cityList = np.sort(self.cityList)
+        
         '''return a numpy ndarray of continents'''
         self.continentList = self.largeData['continent'].unique()
-   
+    
+    def __repr__(self):
+        str = 'Welcome to Pokemon World!'
+        return str
 
     
    
