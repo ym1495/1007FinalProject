@@ -2,47 +2,91 @@ import pandas as pd
 import numpy as np
 import sys
 
-from LoadData import *
+from input.loadData import *
 
 
 class UserChoice:
 
     """
-    This class contains all process that asking user input of choosing cuisine category, cuisine, neighborhood category,
-    and neighborhood.
-    User could go back or exit follow the instruction.
+    ...
     """
     def __init__(self):
-        self.user_decision = {'Cuisine_Category': None, 'Cuisine': None,
-                              'Neighborhood_Category': None, 'Neighborhood': None}
-        self.cuisine = Cuisine()
-        self.nbhd = Neighborhood()
+        self.pokemonId = None
+        self.city = None
+    
+    def get_input(self):
+        self.basicFileName = input('Please input your pokemonGo.csv')
+        self.bigFileName = input('Please input your cleanedData.csv')
+        everything = loadData(self.basicFileName, self.bigFileName)
+        self.pokemonList = everything.nameList
+        self.cityList = everything.cityList
+        
+        
 
-    def select_pokemon(self):
+    def select_pokemon(self,pokemonList):
+        lower_pokeList = ['zero']
+        str = 'Please select a pokemon by its index:\n'
+        for i in pokemonList.index:
+            str = str + '%d %s \n'%(i,pokemonList[i])
+            lower_pokeList.append(pokemonList[i].lower())
         while True:
-            choice = raw_input('\nHow would like to CHOOSE a cuisine category?\n'
-                               'You can type \'back\' to go back.\n'
-                               'A. African\n'
-                               'B. EastAsian\n'
-                               'C. SouthAsian\n'
-                               'D. LatinAmerican\n'
-                               'E. NorthAmerican\n'
-                               'F. European\n'
-                               'G. MiddleEastern\n'
-                               'H. Cafes\n'
-                               'I. Bars\n'
-                               'J. Vegan\n'
-                               'K. OtherBusiness\n'
-                               '---->')
-            choice = choice.lower().rstrip().lstrip()
-            if choice == 'quit':
-                return 'quit'
-            elif choice == 'back':
-                return 'back'
-            elif choice in ['a','b','c','d','e','f','g','h','i','j','k']:
-                self.user_decision['Cuisine_Category'] = self.cuisine.cuisine_category[choice]
-                return 'selected'
-            else:
-                print 'Invalid Input. Please enter again.\n'
+            choice = input(str)
+            try:
+                choice = int(choice)
+                if choice in pokemonList.index:
+                    choice = choice
+                    break
+                else:
+                    print('Please select a pokemon again, within the range of index(1-151)')
+                    continue
+            except ValueError:
+                if choice.lower() in{'quit','q','bye'}: 
+                    choice = 'Wish you luck in pokemon world. Goodbye'
+                    break
+                elif choice.lower() in {'nidoran'}:
+                    while True:
+                        second_choice = input('You want Nidoran to be Female or Male? Please answer with F or M')
+                        if second_choice.lower()=='f'or 'female':
+                            choice = 29
+                            return choice
+                        elif second_choice.lower()=='m' or 'male':
+                            choice = 32
+                            return choice
+                        else:
+                            continue
+                elif choice.lower() in lower_pokeList:
+                    choice = lower_pokeList.index(choice.lower())
+                    break
+                else:
+                    print('Please select a pokemon again, by its index(integer 1-151)')
+                    continue
+        return choice
     
-    
+    def select_city(self, cityList):        
+        lower_cityList = []
+        str = 'Please select a city:\n'
+        for i in range(len(cityList)):
+            lower_cityList.append(cityList[i].lower())
+            str = str + '%d %s \n'%(i,cityList[i])
+        while True:
+            choice = input(str)
+            try:
+                choice = int(choice)
+                if choice in range(len(cityList)):
+                    choice = cityList[choice]
+                    break
+                else:
+                    print('Please select a city again, within the range of index')
+                    continue
+            except ValueError:
+                if choice.lower() in{'quit','q','bye'}: 
+                    choice = 'Wish you luck in pokemon world, goodbye'
+                    break
+                elif choice.lower() in lower_cityList:
+                    index = lower_cityList.index(choice.lower())
+                    choice = cityList[index]
+                    break
+                else:
+                    print('Please select a city again')
+                    continue
+        return choice
