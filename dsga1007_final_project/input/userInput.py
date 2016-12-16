@@ -14,14 +14,7 @@ class UserChoice:
         self.pokemonId = None
         self.city = None
     
-    def get_input(self):
-        self.basicFileName = input('Please input your pokemonGo.csv')
-        self.bigFileName = input('Please input your cleanedData.csv')
-        everything = loadData(self.basicFileName, self.bigFileName)
-        self.pokemonList = everything.nameList
-        self.cityList = everything.cityList
-        
-        
+
 
     def select_pokemon(self,pokemonList):
         lower_pokeList = ['zero']
