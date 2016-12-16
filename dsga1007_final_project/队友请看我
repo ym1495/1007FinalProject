@@ -1,0 +1,7 @@
+cleanedData.csv文件太大了传不上来，你们看看要把csv放到哪一个层级的文件夹下可以运行
+我跑的时候，co-ocur的pie chart报错了，不知道你们之前有没有这个问题，可以检查一下
+我觉得可以再加两个图，我们现在只有两个histogram和一个pie chart，感觉不是很能说明我们会matplotlib
+是不是可以考虑再加个box plot，y轴为frequency x为精灵
+anyway用terminal跑跑试试吧=)
+
+穆昱蕊
