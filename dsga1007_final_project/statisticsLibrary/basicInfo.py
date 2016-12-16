@@ -62,7 +62,7 @@ class pokemonStats():
         @return a tuple of one or two tuples of two integers
         '''
         if len(self.listSameTypePokemons())==1:
-            return self.ranking(self.listSameTypePokemons()[0])
+            return self.ranking(self.listSameTypePokemons()[0]),
         else:
             return self.ranking(self.listSameTypePokemons()[0]), self.ranking(self.listSameTypePokemons()[1])
     
